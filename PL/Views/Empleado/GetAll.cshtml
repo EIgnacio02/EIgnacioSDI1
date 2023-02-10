@@ -1,0 +1,40 @@
+﻿@model ML.Empleado
+
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Todos los usuario</h2>
+
+@Html.ActionLink("Agregar empleado","Formulario","Empleado",htmlAttributes: new {@class="btn btn-success"})
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id Empleado</th>
+            <th>Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Edad</th>
+            <th>Fecha</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Empleado empleado in Model.EmpleadoList)
+        {
+            <tr>
+                <td>@empleado.IdEmpleado</td>
+                <td>@empleado.Nombre</td>
+                <td>@empleado.ApellidoPaterno</td>
+                <td>@empleado.ApellidoMaterno</td>
+                <td>@empleado.Edad</td>
+                <td>@empleado.Fecha</td>
+                <td><a href="@Url.Action("Formulario","Empleado",new {IdEmpleado=empleado.IdEmpleado})">Editar</a></td>
+                <td><a href="@Url.Action("Delete","Empleado",new {IdEmpleado=empleado.IdEmpleado})" onclick="return confirm('Estas seguro de eliminar');">Eliminar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
